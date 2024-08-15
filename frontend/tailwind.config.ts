@@ -1,9 +1,11 @@
+import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config = {
   darkMode: ["class"],
   content: [
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -71,14 +73,32 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "scrolling-banner": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-50% - var(--gap)/2))" },
+        },
+        "scrolling-banner-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-50% - var(--gap)/2))" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "scrolling-banner": "scrolling-banner var(--duration) linear infinite",
+        "scrolling-banner-vertical":
+          "scrolling-banner-vertical var(--duration) linear infinite",
+        "fade-in": "fade-in 0.5s linear forwards",
+        marquee: "marquee var(--marquee-duration) linear infinite",
+        "spin-slow": "spin 4s linear infinite",
+        "spin-slower": "spin 6s linear infinite",
+        "spin-reverse": "spin-reverse 1s linear infinite",
+        "spin-reverse-slow": "spin-reverse 4s linear infinite",
+        "spin-reverse-slower": "spin-reverse 6s linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [nextui(), require("tailwindcss-animate")],
 } satisfies Config;
 
 export default config;
