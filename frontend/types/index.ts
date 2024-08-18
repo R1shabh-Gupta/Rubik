@@ -1,4 +1,5 @@
 import type { IconProps } from "@iconify/react";
+import { type ImageProps } from "next/image";
 import { ReactNode } from "react";
 
 export interface LinkItem {
@@ -31,3 +32,17 @@ export type FAQs = {
 };
 
 export type SocialIconProps = Omit<IconProps, "icon">;
+
+export type TakedownReasons = {
+  name: string;
+  id: string;
+};
+
+export interface FeatureType {
+  name: React.ReactNode;
+  summary: string;
+  description: string;
+  image_light: ImageProps["src"];
+  image_dark: ImageProps["src"];
+  icon: React.ComponentType;
+}
