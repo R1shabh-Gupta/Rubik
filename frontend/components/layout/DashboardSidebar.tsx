@@ -4,6 +4,7 @@ import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { links } from "@/constants/data";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import DashboardThemeSwitch from "./ThemeToggle/dashboard-theme-switch";
 
 const DashboardSidebar = () => {
   const [open, setOpen] = useState(false);
@@ -28,18 +29,34 @@ const DashboardSidebar = () => {
               if (link.label === "Logout") {
                 return (
                   <SignOutButton key={idx}>
-                    <SidebarLink key={idx} link={link} />
+                    <SidebarLink
+                      key={idx}
+                      link={link}
+                      openNav={open}
+                      setOpenNav={setOpen}
+                    />
                   </SignOutButton>
                 );
               } else {
-                return <SidebarLink key={idx} link={link} />;
+                return (
+                  <SidebarLink
+                    key={idx}
+                    link={link}
+                    openNav={open}
+                    setOpenNav={setOpen}
+                  />
+                );
               }
             })}
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <UserButton />
-          {open && <p className="text-sm font-semibold">{user?.fullName}</p>}
+        <div className="flex flex-col gap-4">
+          <DashboardThemeSwitch />
+
+          <div className="flex items-center gap-3">
+            <UserButton />
+            {open && <p className="text-sm font-semibold">{user?.fullName}</p>}
+          </div>
         </div>
       </SidebarBody>
     </Sidebar>
