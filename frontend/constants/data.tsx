@@ -2,19 +2,29 @@ import { Icon } from "@iconify/react";
 import {
   IconArrowLeft,
   IconBrandTabler,
-  IconEye,
   IconFlagDown,
+  IconNotes,
+  IconPasswordFingerprint,
   IconZoomScan,
 } from "@tabler/icons-react";
 
 import {
   FAQs,
+  FeatureType,
   FooterLink,
   LinkItem,
   SocialIconProps,
   SocialLink,
+  TakedownReasons,
   Testimonial,
 } from "@/types";
+
+import screenshotAutoTakedownDark from "@/public/images/AutoTakedown-dark.png";
+import screenshotAutoTakedownLight from "@/public/images/AutoTakedown-light.png";
+import screenshotDomainTracerDark from "@/public/images/DomainTracer-dark.png";
+import screenshotDomainTracerLight from "@/public/images/DomainTracer-light.png";
+import screenshotPasswordGeneratorDark from "@/public/images/PasswordGenerator-dark.png";
+import screenshotPasswordGeneratorLight from "@/public/images/PasswordGenerator-light.png";
 
 export const links: LinkItem[] = [
   {
@@ -32,10 +42,10 @@ export const links: LinkItem[] = [
     ),
   },
   {
-    label: "Breach Detector",
-    href: "/dashboard/breachdetector",
+    label: "Password Generator",
+    href: "/dashboard/passwordgenerator",
     icon: (
-      <IconEye className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      <IconPasswordFingerprint className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
   {
@@ -66,10 +76,6 @@ export const footerLinks: FooterLink[] = [
   {
     name: "AutoTakedown",
     href: "/dashboard/autotakedown",
-  },
-  {
-    name: "BreachDetector",
-    href: "/dashboard/breachdetector",
   },
   {
     name: "DomainTracer",
@@ -234,5 +240,109 @@ export const faqs: FAQs[] = [
     title: "Will Rubik remain free once it's fully developed?",
     content:
       "Yes, Rubik will remain free even after the development phase. Our goal is to provide powerful security tools that are accessible to everyone, regardless of budget.",
+  },
+];
+
+export const takedownReasons: TakedownReasons[] = [
+  {
+    name: "Copyright infringement",
+    id: "copyright-infringement",
+  },
+  {
+    name: "Trademark infringement",
+    id: "trademark-infringement",
+  },
+  {
+    name: "Defamation or libel",
+    id: "defamation-or-libel",
+  },
+  {
+    name: "Privacy violations",
+    id: "privacy-violations",
+  },
+  {
+    name: "Malware or phishing activities",
+    id: "malware-or-phishing-activities",
+  },
+  {
+    name: "Violation of terms of service",
+    id: "violation-of-terms-of-service",
+  },
+  {
+    name: "Personal safety concerns",
+    id: "personal-safety-concerns",
+  },
+  {
+    name: "Other (specify)",
+    id: "other",
+  },
+];
+
+export const featureCards = [
+  {
+    title: "AutoTakedown",
+    href: "/dashboard/autotakedown",
+    icon: IconFlagDown,
+    iconForeground: "text-teal-700",
+    iconBackground: "bg-teal-50",
+    content:
+      "Automatically process and handle takedown requests with ease. Upload the content you want to address, and let our tool take care of the rest.",
+  },
+  {
+    title: "Password Generator",
+    href: "/dashboard/passwordgenerator",
+    icon: IconPasswordFingerprint,
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
+    content:
+      "Generate strong and secure passwords for your accounts. Customize the length and complexity to ensure your passwords are robust and unique.",
+  },
+  {
+    title: "Domain Tracer",
+    href: "/dashboard/domaintracer",
+    icon: IconZoomScan,
+    iconForeground: "text-sky-700",
+    iconBackground: "bg-sky-50",
+    content:
+      "Trace domain details effortlessly. Enter a domain name to get comprehensive information and insights about it using urlscan.io.",
+  },
+  {
+    title: "Frontend Security Notes",
+    href: "/dashboard/notes",
+    icon: IconNotes,
+    iconForeground: "text-yellow-700",
+    iconBackground: "bg-yellow-50",
+    content:
+      "Access detailed notes and guidelines on frontend security best practices. Enhance your knowledge and skills to protect your applications from vulnerabilities.",
+  },
+];
+
+export const features: Array<FeatureType> = [
+  {
+    name: "AutoTakedown",
+    summary: "Streamline takedown requests with automated processing.",
+    description:
+      "Easily manage and process takedown requests by uploading the content you want addressed. Our tool handles the rest, ensuring swift and efficient removal.",
+    image_light: screenshotAutoTakedownLight,
+    image_dark: screenshotAutoTakedownDark,
+    icon: IconFlagDown,
+  },
+  {
+    name: "Password Generator",
+    summary: "Generate strong, secure passwords tailored to your needs.",
+    description:
+      "Customize your passwords by adjusting the length and complexity to ensure they are robust and unique. Perfect for protecting your accounts.",
+    image_light: screenshotPasswordGeneratorLight,
+    image_dark: screenshotPasswordGeneratorDark,
+    icon: IconPasswordFingerprint,
+  },
+  {
+    name: "Domain Tracer",
+    summary: "Effortlessly trace and gather domain details.",
+    description:
+      "Get comprehensive information and insights about any domain by simply entering its name. Perfect for investigating and understanding domain histories.",
+    image_light: screenshotDomainTracerLight,
+    image_dark: screenshotDomainTracerDark,
+    icon: IconZoomScan,
   },
 ];
