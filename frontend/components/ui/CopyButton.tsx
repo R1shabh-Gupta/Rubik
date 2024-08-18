@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { Button } from "./button";
 
-const CopyButton = () => {
+const CopyButton = ({ textToBeCopied }: { textToBeCopied: string }) => {
   const [isCopy, setIsCopy] = useState("Copy");
   const [isCopyIcon, setIsCopyIcon] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText("outputText");
+    navigator.clipboard.writeText(textToBeCopied);
     setIsCopy("Copied");
     setIsCopyIcon(true);
     setTimeout(() => {
