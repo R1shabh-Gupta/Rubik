@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,61 +10,75 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 import { Textarea } from "./ui/textarea";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { takedownReasons } from "@/constants/data";
+import axios from "axios";
 import CopyButton from "./ui/CopyButton";
 
 const TakedownForm = () => {
-  const takedownReasons = [
-    {
-      name: "Copyright infringement",
-      id: "copyright-infringement",
-    },
-    {
-      name: "Trademark infringement",
-      id: "trademark-infringement",
-    },
-    {
-      name: "Defamation or libel",
-      id: "defamation-or-libel",
-    },
-    {
-      name: "Privacy violations",
-      id: "privacy-violations",
-    },
-    {
-      name: "Malware or phishing activities",
-      id: "malware-or-phishing-activities",
-    },
-    {
-      name: "Violation of terms of service",
-      id: "violation-of-terms-of-service",
-    },
-    {
-      name: "Personal safety concerns",
-      id: "personal-safety-concerns",
-    },
-    {
-      name: "Other (specify)",
-      id: "other",
-    },
-  ];
+  const [infringingContent, setInfringingContent] = useState("");
+  const [brandContent, setBrandContent] = useState("");
+  const [selectedReason, setSelectedReason] = useState("");
+  const [detailedDescription, setDetailedDescription] = useState("");
+  const [generatedNotice, setGeneratedNotice] = useState("");
+
+  const handleGenerateNotice = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    event.preventDefault();
+
+    const noticeData = {
+      infringingContent,
+      brandContent,
+      selectedReason,
+      detailedDescription,
+    };
+
+    console.log("Generated Notice Data:", noticeData);
+
+    try {
+      const response = await axios.get(
+        "https://r1shabh.pythonanywhere.com/api/takedown",
+        {
+          params: noticeData,
+        }
+      );
+
+      console.log(response.data);
+      setGeneratedNotice(response.data.notice);
+    } catch (error: any) {
+      console.error(
+        "Error fetching domain details:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const downloadNoticeTxtFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([generatedNotice], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "notice.txt";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
   return (
     <>
-      <h1 className="flex gap-1 text-2xl font-semibold">
-        <span className="text-[#E51015]">Takedown </span>Form
-      </h1>
-      <p className="text-sm font-medium">Enter takedown details</p>
-
-      <form className="mt-4">
+      <form className="mt-4 px-2">
         <div className="grid items-center w-full gap-6">
-          <div className="flex flex-row gap-8">
+          <div className="flex sm:flex-row flex-col gap-8">
             <div className="basis-1/2">
               <Label htmlFor="name">Infringing Content</Label>
               <Input
                 id="name"
                 placeholder="http://www.website-that-stole-your-content.com"
+                value={infringingContent}
+                onChange={(e) => setInfringingContent(e.target.value)}
               />
             </div>
 
@@ -71,6 +87,8 @@ const TakedownForm = () => {
               <Input
                 id="name"
                 placeholder="http://www.website-from-where-data-is-stolen.com"
+                value={brandContent}
+                onChange={(e) => setBrandContent(e.target.value)}
               />
             </div>
           </div>
@@ -79,7 +97,10 @@ const TakedownForm = () => {
             <Label htmlFor="framework" className="mb-1.5">
               Select the reason for infringement
             </Label>
-            <Select>
+            <Select
+              value={selectedReason}
+              onValueChange={(value) => setSelectedReason(value)}
+            >
               <SelectTrigger id="framework">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
@@ -101,9 +122,11 @@ const TakedownForm = () => {
               placeholder="Type your message here."
               id="message"
               className="leading-9 mb-1.5"
+              value={detailedDescription}
+              onChange={(e) => setDetailedDescription(e.target.value)}
             />
             <div className="flex justify-between">
-              <Button>Generate Notice</Button>
+              <Button onClick={handleGenerateNotice}>Generate Notice</Button>
 
               <Dialog>
                 <DialogTrigger>Need help?</DialogTrigger>
@@ -147,15 +170,18 @@ const TakedownForm = () => {
               placeholder="Review your generated notice here"
               id="message"
               className="leading-9 mb-1.5"
+              value={generatedNotice}
+              onChange={(e) => setGeneratedNotice(e.target.value)}
             />
             <div className="flex justify-between">
-              <div className="flex gap-4">
-                <Button className="bg-[#e11318] hover:bg-[#E51015] text-white font-semibold">
-                  Download Notice
-                </Button>
-                <Button>Send e-mail</Button>
-              </div>
-              <CopyButton />
+              <Button
+                className="bg-[#e11318] hover:bg-[#E51015] text-white font-semibold"
+                onClick={downloadNoticeTxtFile}
+              >
+                Download Notice
+              </Button>
+
+              <CopyButton textToBeCopied={generatedNotice} />
             </div>
           </div>
         </div>
