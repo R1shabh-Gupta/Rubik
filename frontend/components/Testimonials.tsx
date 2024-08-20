@@ -21,7 +21,10 @@ const Testimonials = () => {
   );
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-10 sm:py-32 lg:px-8 lg:py-10">
+    <section
+      className="mx-auto w-full max-w-6xl px-6 py-10 sm:py-32 lg:px-8 lg:py-10"
+      id="testimonials"
+    >
       <div className="mb-10">
         <h2 className="max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white text-3xl md:text-5xl md:leading-tight">
           <span>Loved by people all over the universe</span>

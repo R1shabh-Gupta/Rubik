@@ -46,3 +46,8 @@ export interface FeatureType {
   image_dark: ImageProps["src"];
   icon: React.ComponentType;
 }
+
+export interface MenuItem {
+  label: string;
+  link: string;
+}

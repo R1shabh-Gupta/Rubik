@@ -13,6 +13,7 @@ import {
   FeatureType,
   FooterLink,
   LinkItem,
+  MenuItem,
   SocialIconProps,
   SocialLink,
   TakedownReasons,
@@ -53,6 +54,13 @@ export const links: LinkItem[] = [
     href: "/dashboard/domaintracer",
     icon: (
       <IconZoomScan className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    ),
+  },
+  {
+    label: "Frontend Security Notes",
+    href: "/dashboard/notes",
+    icon: (
+      <IconNotes className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
   {
@@ -345,4 +353,11 @@ export const features: Array<FeatureType> = [
     image_dark: screenshotDomainTracerDark,
     icon: IconZoomScan,
   },
+];
+
+export const menuItems: MenuItem[] = [
+  { label: "Features", link: "#features" },
+  { label: "Testimonials", link: "#testimonials" },
+  { label: "FAQs", link: "#faqs" },
+  { label: "Dashboard", link: "/dashboard" },
 ];
