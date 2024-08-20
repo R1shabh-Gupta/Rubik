@@ -25,8 +25,7 @@ const ThemeRadioItem = ({ icon, ...props }: RadioProps & { icon: string }) => {
   const groupContext = useRadioGroupContext();
 
   const isSelected =
-    isSelfSelected ||
-    Number(groupContext.groupState.selectedValue) >= Number(props.value);
+    isSelfSelected || groupContext.groupState.selectedValue === props.value;
 
   const wrapperProps = getWrapperProps();
 
@@ -55,7 +54,7 @@ const DashboardThemeSwitch = React.forwardRef<
   HTMLDivElement,
   Omit<RadioGroupProps, "children">
 >(({ classNames = {}, ...props }, ref) => {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <RadioGroup
@@ -65,7 +64,7 @@ const DashboardThemeSwitch = React.forwardRef<
         ...classNames,
         wrapper: cn("gap-0 items-center", classNames?.wrapper),
       }}
-      defaultValue="dark"
+      defaultValue={theme}
       orientation="horizontal"
       {...props}
     >
