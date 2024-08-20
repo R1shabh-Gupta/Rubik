@@ -1,7 +1,52 @@
 import { Card } from "@/components/ui/card";
-import { featureCards } from "@/constants/data";
+
+import {
+  IconFlagDown,
+  IconNotes,
+  IconPasswordFingerprint,
+  IconZoomScan,
+} from "@tabler/icons-react";
 
 const Dashboard = () => {
+  const featureCards = [
+    {
+      title: "AutoTakedown",
+      href: "/dashboard/autotakedown",
+      icon: IconFlagDown,
+      iconForeground: "text-teal-700",
+      iconBackground: "bg-teal-50",
+      content:
+        "Automatically process and handle takedown requests with ease. Upload the content you want to address, and let our tool take care of the rest.",
+    },
+    {
+      title: "Password Generator",
+      href: "/dashboard/passwordgenerator",
+      icon: IconPasswordFingerprint,
+      iconForeground: "text-purple-700",
+      iconBackground: "bg-purple-50",
+      content:
+        "Generate strong and secure passwords for your accounts. Customize the length and complexity to ensure your passwords are robust and unique.",
+    },
+    {
+      title: "Domain Tracer",
+      href: "/dashboard/domaintracer",
+      icon: IconZoomScan,
+      iconForeground: "text-sky-700",
+      iconBackground: "bg-sky-50",
+      content:
+        "Trace domain details effortlessly. Enter a domain name to get comprehensive information and insights about it using urlscan.io.",
+    },
+    {
+      title: "Frontend Security Notes",
+      href: "/dashboard/notes",
+      icon: IconNotes,
+      iconForeground: "text-yellow-700",
+      iconBackground: "bg-yellow-50",
+      content:
+        "Access detailed notes and guidelines on frontend security best practices. Enhance your knowledge and skills to protect your applications from vulnerabilities.",
+    },
+  ];
+
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
