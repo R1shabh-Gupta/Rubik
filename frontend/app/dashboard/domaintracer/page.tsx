@@ -55,7 +55,11 @@ const DomainTracer = () => {
       </h1>
 
       <form className="flex w-full items-start gap-2 my-6">
-        <DomainInput value={domain} onValueChange={setDomain} />
+        <DomainInput
+          value={domain}
+          onValueChange={setDomain}
+          onSubmit={handleDomainSubmit}
+        />
         <Tooltip showArrow content="Send message">
           <Button
             isIconOnly
