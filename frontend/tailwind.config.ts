@@ -85,9 +85,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "scrolling-banner": "scrolling-banner var(--duration) linear infinite",
+        "scrolling-banner": "scrolling-banner 18s alternate infinite",
         "scrolling-banner-vertical":
-          "scrolling-banner-vertical var(--duration) linear infinite",
+          "scrolling-banner-vertical 18s alternate infinite",
         "fade-in": "fade-in 0.5s linear forwards",
         marquee: "marquee var(--marquee-duration) linear infinite",
         "spin-slow": "spin 4s linear infinite",
